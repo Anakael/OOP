@@ -7,7 +7,11 @@ namespace game::units::mages
 {
     class mage : public unit
     {
-
+    protected:
+        int max_mana;
+        int mana;
+    public:
+        void restore_mana(int mana_point);
     };
 }
 

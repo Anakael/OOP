@@ -6,13 +6,14 @@ namespace game
     class object
     {
     protected:
-        int health;
-        int defend_point;
+        int max_health = 0;
+        int health = 0;
+        int defend_point = 0;
 
     public:
         object();
 
-        object(int _health, int _defend_point);
+        object(int _max_health, int _defend_point);
 
         int get_health()
         { return health; }

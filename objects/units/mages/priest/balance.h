@@ -14,6 +14,11 @@ public:
         return 370;
     }
 
+    static int priest_mana()
+    {
+        return 400;
+    }
+
     static int priest_armor()
     {
         return 0;

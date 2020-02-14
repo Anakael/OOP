@@ -7,7 +7,8 @@ namespace game::field::landscape
 {
     class hill : public landscape
     {
-
+    public:
+        void affect_to_unit(units::unit_proxy &_unit_proxy) override;
     };
 }
 

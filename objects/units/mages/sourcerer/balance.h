@@ -14,6 +14,11 @@ public:
         return 405;
     }
 
+    static int sourcerer_mana()
+    {
+        return 400;
+    }
+
     static int sourcerer_armor()
     {
         return 0;
