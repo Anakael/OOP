@@ -2,9 +2,9 @@
 
 namespace game::field::neutral_objects
 {
-    void neutral_object::affect_to_unit(game::units::unit& _unit)
+    bool neutral_object::affect_to_unit(game::units::unit& _unit)
     {
-        strategy->affect_to_unit(_unit);
+        return strategy->affect_to_unit(_unit);
     }
 
     void neutral_object::set_strategy(strategies::neutral_object_affect_strategy&& _strategy)

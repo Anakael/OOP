@@ -4,11 +4,9 @@
 namespace game::units::mages
 {
     priest::priest()
+            : mage(balance::priest_health(), balance::priest_mana(), balance::priest_armor(), balance::priest_attack(),
+                   balance::priest_attack_range())
     {
-        max_health = health = balance::priest_health();
-        max_mana = mana = balance::priest_mana();
-        attack_point = balance::priest_attack();
-        defend_point = balance::priest_armor();
     }
 }
 

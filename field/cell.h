@@ -12,6 +12,7 @@ namespace game::field
     private:
         std::unique_ptr<landscape::landscape> landscape;
         std::unique_ptr<game::object> object;
+        std::unique_ptr<game::object> neutral_element;
         static void swap(cell& first, cell& second);
     public:
         cell();

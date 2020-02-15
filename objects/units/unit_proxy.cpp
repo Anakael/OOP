@@ -15,7 +15,7 @@ namespace game::units
     }
 
     unit_proxy::unit_proxy(unit& _unit)
-            : internal_unit(_unit)
+            : unit(_unit), internal_unit(_unit)
     {
 
     }

@@ -5,7 +5,7 @@ namespace game::field::neutral_objects
 {
     strengthening_object::strengthening_object()
     {
-        set_strategy(strategies::strengthening_strategy());
+        set_strategy(std::move(*(new strategies::strengthening_strategy())));
     }
 }
 

@@ -5,7 +5,7 @@ namespace game::field::neutral_objects
 {
     restoring_object::restoring_object()
     {
-        set_strategy(strategies::restoring_strategy());
+        set_strategy(std::move(*(new strategies::restoring_strategy())));
     }
 }
 

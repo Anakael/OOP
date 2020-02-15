@@ -19,7 +19,7 @@ namespace game::field
 
     field_iterator::field_iterator(const field_iterator& other)
     {
-        field_iterator obj(other);
+        field_iterator obj(*other.inner_field, other.current_x, other.current_y);
         swap(*this, obj);
     }
 
@@ -42,12 +42,12 @@ namespace game::field
 
     field_iterator& field_iterator::operator++()
     {
-        auto current = *this;
+        auto current = this;
         inc();
-        return current;
+        return *current;
     }
 
-    field_iterator field_iterator::operator++(int)
+    field_iterator& field_iterator::operator++(int)
     {
         inc();
         return *this;

@@ -7,7 +7,10 @@ namespace game::units::shooters
 {
     class shooter : public unit
     {
+    public:
+        shooter(int _health, int _armor, int _attack, int _attack_range);
 
+        ~shooter() override = 0;
     };
 }
 

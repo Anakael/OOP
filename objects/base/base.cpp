@@ -3,10 +3,11 @@
 
 namespace game::base
 {
-    game::base::base::base(int _max_units_count)
-            : max_units_count(_max_units_count)
+    base::base(int _max_units_count, int _health, int _armor_point = 0)
+            : object(_health, _armor_point), max_units_count(_max_units_count)
     {
         factory = std::make_unique<units::unit_factory>();
+        health = _health;
     }
 
     std::unique_ptr<units::unit> base::create_unit(unit_enum type)
@@ -28,7 +29,8 @@ namespace game::base
     void base::update(const game::units::unit& _object)
     {
         using namespace units;
-        units.erase(std::remove_if(units.begin(), units.end(), [_object](const auto& x){return x.get() == _object;}), units.end());
+        units.erase(std::remove_if(units.begin(), units.end(), [&_object](const auto& x)
+        { return x.get() == _object; }), units.end());
     }
 }
 

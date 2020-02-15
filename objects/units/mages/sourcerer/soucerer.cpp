@@ -4,11 +4,9 @@
 namespace game::units::mages
 {
     soucerer::soucerer()
+            : mage(balance::sourcerer_health(), balance::sourcerer_mana(), balance::sourcerer_armor(), balance::sourcerer_attack(),
+                      balance::sourcerer_attack_range())
     {
-        max_health = health = balance::sourcerer_health();
-        max_mana = mana = balance::sourcerer_mana();
-        attack_point = balance::sourcerer_attack();
-        defend_point = balance::sourcerer_armor();
     }
 }
 

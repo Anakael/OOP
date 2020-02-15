@@ -5,7 +5,7 @@
 
 namespace game::field::neutral_objects
 {
-    class restoring_object : neutral_object
+    class restoring_object : public neutral_object
     {
     public:
         restoring_object();

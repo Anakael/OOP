@@ -9,6 +9,11 @@ public:
         return 9;
     }
 
+    static int priest_attack_range()
+    {
+        return 60;
+    }
+
     static int priest_health()
     {
         return 370;

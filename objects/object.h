@@ -1,25 +1,24 @@
 #ifndef LAB1_OBJECT_H
 #define LAB1_OBJECT_H
 
+#include <objects/attributes/protected_attribute.h>
+
 namespace game
 {
     class object
     {
     protected:
-        int max_health = 0;
-        int health = 0;
-        int defend_point = 0;
+        attributes::protected_attribute health;
+        attributes::base_attribute armor;
 
     public:
-        object();
-
         object(int _max_health, int _defend_point);
 
-        int get_health()
-        { return health; }
+        int get_health() const
+        { return health.get_value(); }
 
-        int get_defend_point()
-        { return defend_point; }
+        int get_defend_point() const
+        { return armor.get_value(); }
     };
 }
 

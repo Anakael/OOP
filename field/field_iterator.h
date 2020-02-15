@@ -24,7 +24,7 @@ namespace game::field
         field_iterator& operator=(field_iterator&& other) noexcept;
 
         field_iterator& operator++();
-        field_iterator operator++(int);
+        field_iterator& operator++(int);
         bool operator==(const field_iterator& rhs) const;
         bool operator!=(const field_iterator& rhs) const;
         cell& operator*();

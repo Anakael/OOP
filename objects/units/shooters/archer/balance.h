@@ -9,6 +9,11 @@ public:
         return 26;
     }
 
+    static int archer_attack_range()
+    {
+        return 70;
+    }
+
     static int archer_health()
     {
         return 245;

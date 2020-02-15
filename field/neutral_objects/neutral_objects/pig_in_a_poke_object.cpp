@@ -12,7 +12,7 @@ namespace game::field::neutral_objects
     {
         std::random_device rd;
         std::mt19937 mt(rd());
-        std::discrete_distribution<> dis({4,4,4,1});
+        std::discrete_distribution<> dis({4,2,3,1});
         std::unique_ptr<strategies::neutral_object_affect_strategy> strategy;
         switch (dis(mt))
         {
@@ -29,6 +29,6 @@ namespace game::field::neutral_objects
                 strategy = std::make_unique<strategies::killing_strategy>(strategies::killing_strategy());
                 break;
         }
-        set_strategy(std::move(*strategy));
+        set_strategy(std::move(*strategy.release()));
     }
 }

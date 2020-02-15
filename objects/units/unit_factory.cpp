@@ -9,10 +9,6 @@
 #include "mages/priest/priest.h"
 #include "mages/sourcerer/soucerer.h"
 
-game::units::unit_factory::~unit_factory()
-{
-
-}
 
 namespace game::units
 {
@@ -24,21 +20,24 @@ namespace game::units
         switch (type)
         {
             case unit_enum::FOOTMAN:
-                return std::make_unique<warrior>(footman());
+                return std::make_unique<footman>(footman());
             case unit_enum::KNIGHT:
-                return std::make_unique<warrior>(knight());
+                return std::make_unique<knight>(knight());
             case unit_enum::ARCHER:
-                return std::make_unique<shooter>(archer());
+                return std::make_unique<archer>(archer());
             case unit_enum::RIFLEMAN:
-                return std::make_unique<shooter>(rifleman());
+                return std::make_unique<rifleman>(rifleman());
             case unit_enum::PRIEST:
-                return std::make_unique<mage>(priest());
+                return std::make_unique<priest>(priest());
             case unit_enum::SOURCERER:
-                return std::make_unique<mage>(soucerer());
+                return std::make_unique<soucerer>(soucerer());
             default:
                 return nullptr;
         }
     }
+
+    game::units::unit_factory::~unit_factory()
+    = default;
 }
 
 

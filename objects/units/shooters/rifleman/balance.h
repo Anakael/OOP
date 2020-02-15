@@ -10,6 +10,11 @@ public:
         return 29;
     }
 
+    static int rifleman_attack_range()
+    {
+        return 60;
+    }
+
     static int rifleman_health()
     {
         return 535;

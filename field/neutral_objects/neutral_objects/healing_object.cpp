@@ -5,6 +5,6 @@ namespace game::field::neutral_objects
 {
     healing_object::healing_object()
     {
-        set_strategy(strategies::healing_strategy());
+        set_strategy(std::move(*(new strategies::healing_strategy())));
     }
 }

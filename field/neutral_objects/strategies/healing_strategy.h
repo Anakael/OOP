@@ -10,7 +10,7 @@ namespace game::field::neutral_objects::strategies
     private:
         int heal_point = 200;
     public:
-        void affect_to_unit(game::units::unit &_unit) override;
+        bool affect_to_unit(game::units::unit &_unit) override;
     };
 }
 

@@ -2,8 +2,7 @@
 #include "balance.h"
 
 game::units::shooters::rifleman::rifleman()
+        : shooter(balance::rifleman_health(), balance::rifleman_armor(), balance::rifleman_attack(),
+                  balance::rifleman_attack_range())
 {
-    health = balance::rifleman_health();
-    attack_point = balance::rifleman_attack();
-    defend_point = balance::rifleman_armor();
 }

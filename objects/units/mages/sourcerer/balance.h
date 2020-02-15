@@ -9,6 +9,11 @@ public:
         return 11;
     }
 
+    static int sourcerer_attack_range()
+    {
+        return 60;
+    }
+
     static int sourcerer_health()
     {
         return 405;

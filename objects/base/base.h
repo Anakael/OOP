@@ -16,7 +16,7 @@ namespace game::base
         std::vector<std::reference_wrapper<units::unit>> units;
         int max_units_count;
     public:
-        base(int _max_units_count);
+        base(int _max_units_count, int health, int _armor_point);
 
         int get_max_units_count()
         { return max_units_count; }

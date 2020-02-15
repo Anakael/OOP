@@ -2,8 +2,7 @@
 #include "balance.h"
 
 game::units::shooters::archer::archer()
+        : shooter(balance::archer_health(), balance::archer_armor(), balance::archer_attack(),
+                  balance::archer_attack_range())
 {
-    health = balance::archer_health();
-    attack_point = balance::archer_attack();
-    defend_point = balance::archer_armor();
 }

@@ -4,7 +4,14 @@ namespace game::units::mages
 {
     void mage::restore_mana(int mana_point)
     {
-        int new_health = health + mana_point;
-        health = new_health < max_health ? new_health : max_health;
+        mana.increase(mana_point);
     }
+
+    mage::mage(int _health, int _mana, int _armor, int _attack, int _attack_range)
+            : unit(_health, _armor, _attack, _attack_range), mana(_mana)
+    {
+    }
+
+    mage::~mage()
+    = default;
 }
