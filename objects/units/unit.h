@@ -36,7 +36,7 @@ class unit : public game::object, public publisher
 
         virtual void attack_to(common::coordinates _to);
 
-        virtual ~unit() = 0;
+        ~unit() override = 0;
     };
 }
 

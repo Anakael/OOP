@@ -12,7 +12,6 @@ int main()
     using namespace game::units;
     auto tmp_field = field::field(2, 2, 100);
     mediator mediator(tmp_field);
-    unit_factory factory(mediator);
     base base(mediator, 10, 5000, 10);
     auto f = base.create_unit(unit_enum::FOOTMAN, common::coordinates(0,1));
     f->move_to(common::coordinates(0,0));

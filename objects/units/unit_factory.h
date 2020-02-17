@@ -12,11 +12,11 @@ namespace game::units
     class unit_factory : public component
     {
     public:
-        unit_factory(mediator& _mediator);
+        explicit unit_factory(mediator& _mediator);
 
         virtual std::shared_ptr<unit> create(unit_enum type);
 
-        ~unit_factory();
+        ~unit_factory() override;
     };
 }
 

@@ -27,7 +27,7 @@ namespace game
 
         std::shared_ptr<game::units::unit> create_unit(unit_enum type, common::coordinates _to);
 
-        virtual void update(const units::unit& _unit) override;
+        void update(const units::unit& _unit) override;
     };
 }
 

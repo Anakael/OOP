@@ -7,7 +7,6 @@ namespace game
     mediator::mediator(field::field& _field)
             : field(_field)
     {
-        _field.set_mediator(*this);
     }
 
     void mediator::send(commands::command&& _command)

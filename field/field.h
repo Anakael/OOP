@@ -12,7 +12,7 @@ namespace game::field
 {
     class field_iterator;
 
-    class field : public component
+    class field
     {
         friend class field_iterator;
 

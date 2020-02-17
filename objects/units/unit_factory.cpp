@@ -38,8 +38,6 @@ namespace game::units
             case unit_enum::SOURCERER:
                 new_unit = std::make_shared<soucerer>(soucerer());
                 break;
-            default:
-                return nullptr;
         }
         new_unit->set_mediator(*mediator_ref);
         return new_unit;

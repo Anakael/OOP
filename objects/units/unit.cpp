@@ -16,7 +16,7 @@ namespace game::units
 
     void unit::die()
     {
-        notify(*this);
+        https://github.com/Anakael/OOP        notify(*this);
         object::die();
     }
 

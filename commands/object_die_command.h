@@ -8,7 +8,7 @@ namespace game::commands
     class object_die_command : public command
     {
     public:
-        object_die_command(object& _sender);
+        explicit object_die_command(object& _sender);
         void operator()(field::field& _field) override;
     };
 }
