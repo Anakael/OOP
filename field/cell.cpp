@@ -1,5 +1,7 @@
 #include "cell.h"
 
+#include <utility>
+
 namespace game::field
 {
     void cell::delete_object()
@@ -7,27 +9,18 @@ namespace game::field
         object.reset();
     }
 
-    cell::cell(const cell& other)
-    {
-        landscape.reset(other.landscape.get());
-        object.reset(other.object.get());
-    }
-
-    cell& cell::operator=(cell other)
-    {
-        swap(*this, other);
-        return *this;
-    }
-
     cell::cell()
-    {
-
-    }
+    = default;
 
     void cell::swap(cell& first, cell& second)
     {
         using std::swap;
         swap(first.landscape, second.landscape);
         swap(first.object, second.object);
+    }
+
+    void cell::set_object(std::shared_ptr<game::object> _object)
+    {
+        object = std::move(_object);
     }
 }

@@ -10,18 +10,16 @@ namespace game::field
     class cell
     {
     private:
-        std::unique_ptr<landscape::landscape> landscape;
-        std::unique_ptr<game::object> object;
-        std::unique_ptr<game::object> neutral_element;
+        std::shared_ptr<landscape::landscape> landscape;
+        std::shared_ptr<game::object> object;
+        std::shared_ptr<game::object> neutral_element;
         static void swap(cell& first, cell& second);
     public:
         cell();
-        cell(const cell& other);
-        cell& operator=(cell other);
 
-        game::object* get_object() { return object.get(); };
+        std::shared_ptr<game::object> get_object() const { return object; };
 
-        void set_object(game::object& _object) { object = std::make_unique<game::object>(_object); };
+        void set_object(std::shared_ptr<game::object> _object);
 
         void delete_object();
     };

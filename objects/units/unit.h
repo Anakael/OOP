@@ -5,40 +5,36 @@
 #include <observer/publisher.h>
 #include <field/neutral_objects/neutral_objects/neutral_object.h>
 #include <memory>
+#include <common/coordinates.h>
 #include <objects/attributes/attack_attribute.h>
 
 namespace game::field
 {
     class field;
+    class cell;
 }
 
 namespace game::units
 {
-    class unit : public game::object, public publisher
+class unit : public game::object, public publisher
     {
     protected:
-        std::shared_ptr<game::field::field> field;
-
-        void die();
+        void die() override;
 
         attributes::attack_attribute attack;
 
     public:
         unit(int _health, int _armor, int _attack, int attack_range);
 
-        void increase_armore(int armor_point);
+        attributes::attack_attribute get_attack() const { return attack; }
 
-        void get_healing(int heal_point);
-
-        void get_damage(int damage);
-
-        virtual void move_to(int x, int y);
+        virtual void move_to(common::coordinates _to);
 
         void pick_up_neutral_object(game::field::neutral_objects::neutral_object& neutral_object);
 
         bool operator==(const unit& other);
 
-        virtual void attack_to(int x, int y);
+        virtual void attack_to(common::coordinates _to);
 
         virtual ~unit() = 0;
     };

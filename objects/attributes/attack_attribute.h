@@ -11,6 +11,8 @@ namespace game::attributes
         int attack_range;
     public:
         attack_attribute(int _attack_points, int _attack_range);
+
+        int get_attack_range() const { return attack_range; }
     };
 }
 

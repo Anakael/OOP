@@ -5,6 +5,7 @@
 #include <objects/object.h>
 #include <memory>
 #include "field.h"
+#include <common/coordinates.h>
 
 namespace game::field
 {
@@ -12,21 +13,31 @@ namespace game::field
     {
     private:
         std::unique_ptr<field> inner_field;
-        int current_x;
-        int current_y;
+        common::coordinates current_coords;
+
         static void swap(field_iterator& first, field_iterator& second);
+
         void inc();
+
     public:
-        field_iterator(field& _field, int x, int y);
+        field_iterator(field& _field, common::coordinates _coords);
+
         field_iterator(const field_iterator& other);
+
         field_iterator& operator=(field_iterator other);
-        field_iterator(field_iterator&& other) noexcept ;
+
+        field_iterator(field_iterator&& other) noexcept;
+
         field_iterator& operator=(field_iterator&& other) noexcept;
 
         field_iterator& operator++();
+
         field_iterator& operator++(int);
+
         bool operator==(const field_iterator& rhs) const;
+
         bool operator!=(const field_iterator& rhs) const;
+
         cell& operator*();
     };
 }

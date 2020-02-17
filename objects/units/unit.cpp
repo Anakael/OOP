@@ -1,50 +1,28 @@
 #include "unit.h"
 #include <iostream>
-#include <field/field.h>
+#include <commands/attack_command.h>
+#include <mediator/mediator.h>
+#include <commands/move_command.h>
 
 namespace game::units
 {
-    void unit::move_to(int _x, int _y)
-    {
-        //TODO: Remove from this
-        field->add_object(*this, _x, _y);
-    }
-
     unit::~unit()
     = default;
 
-    void unit::attack_to(int x, int y)
+    void unit::attack_to(common::coordinates _to)
     {
-        //TODO: realize
-    }
-
-    void unit::get_healing(int heal_point)
-    {
-        health.increase(heal_point);
+        mediator_ref->send(commands::attack_command(*this, _to));
     }
 
     void unit::die()
     {
         notify(*this);
-    }
-
-    void unit::increase_armore(int armor_point)
-    {
-        armor.increase(armor_point);
+        object::die();
     }
 
     bool unit::operator==(const unit& other)
     {
         return this == &other;
-    }
-
-    void unit::get_damage(int damage)
-    {
-        health.decrease(damage);
-        if (!health.get_value())
-        {
-            die();
-        }
     }
 
     void unit::pick_up_neutral_object(game::field::neutral_objects::neutral_object& neutral_object)
@@ -58,5 +36,10 @@ namespace game::units
     unit::unit(int _health, int _armor, int _attack, int _attack_range)
         : object(_health, _armor), attack(_attack, _attack_range)
     {
+    }
+
+    void unit::move_to(common::coordinates _to)
+    {
+        mediator_ref->send(commands::move_command(*this, _to));
     }
 }

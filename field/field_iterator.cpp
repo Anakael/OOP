@@ -6,20 +6,19 @@ namespace game::field
     {
         using std::swap;
 
-        swap(first.current_x, second.current_x);
-        swap(first.current_y, second.current_y);
+        swap(first.current_coords, second.current_coords);
         swap(first.inner_field, second.inner_field);
     }
 
-    field_iterator::field_iterator(field& _field, int x = 0, int y = 0)
-            : current_x(x), current_y(y)
+    field_iterator::field_iterator(field& _field, common::coordinates _coords)
+            : current_coords(_coords)
     {
         inner_field = std::make_unique<field>(_field);
     }
 
     field_iterator::field_iterator(const field_iterator& other)
     {
-        field_iterator obj(*other.inner_field, other.current_x, other.current_y);
+        field_iterator obj(*other.inner_field, other.current_coords);
         swap(*this, obj);
     }
 
@@ -55,19 +54,19 @@ namespace game::field
 
     void field_iterator::inc()
     {
-        if (current_x + 1 > inner_field->width)
+        if (current_coords.x + 1 > inner_field->width)
         {
-            current_x = 0;
-            ++current_y;
+            current_coords.x = 0;
+            ++current_coords.y;
         } else
         {
-            ++current_x;
+            ++current_coords.x;
         }
     }
 
     bool field_iterator::operator==(const field_iterator& rhs) const
     {
-        return current_x == rhs.current_x && current_y == rhs.current_y;
+        return current_coords.x == rhs.current_coords.x && current_coords.y == rhs.current_coords.y;
     }
 
     bool field_iterator::operator!=(const field_iterator& rhs) const
@@ -77,6 +76,6 @@ namespace game::field
 
     cell& field_iterator::operator*()
     {
-        return inner_field->cells[current_x][current_y];
+        return inner_field->cells[current_coords.x][current_coords.y];
     }
 }

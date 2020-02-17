@@ -1,22 +1,25 @@
 #include "base.h"
 #include <iostream>
+#include <commands/create_object_command.h>
 
-namespace game::base
+namespace game
 {
-    base::base(int _max_units_count, int _health, int _armor_point = 0)
-            : object(_health, _armor_point), max_units_count(_max_units_count)
+    base::base(mediator& mediator, int _max_units_count, int health, int _armor_point)
+            : object(health, _armor_point), max_units_count(_max_units_count)
     {
-        factory = std::make_unique<units::unit_factory>();
-        health = _health;
+        mediator_ref = &mediator;
+        factory = std::make_unique<units::unit_factory>(*mediator_ref);
+        health = health;
     }
 
-    std::unique_ptr<units::unit> base::create_unit(unit_enum type)
+    std::shared_ptr<units::unit> base::create_unit(unit_enum type, common::coordinates _to)
     {
         if (units.size() + 1 <= max_units_count)
         {
             auto new_unit = factory->create(type);
             units.emplace_back(*new_unit);
             new_unit->add_subscriber(*this);
+            mediator_ref->send(commands::create_object_command(*this, new_unit, _to));
             return new_unit;
         }
         else

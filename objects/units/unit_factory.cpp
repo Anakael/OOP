@@ -12,28 +12,42 @@
 
 namespace game::units
 {
-    std::unique_ptr<unit> game::units::unit_factory::create(unit_enum type)
+    std::shared_ptr<unit> game::units::unit_factory::create(unit_enum type)
     {
         using namespace warriors;
         using namespace mages;
         using namespace shooters;
+        auto new_unit = std::shared_ptr<unit>();
         switch (type)
         {
             case unit_enum::FOOTMAN:
-                return std::make_unique<footman>(footman());
+                new_unit = std::make_shared<footman>(footman());
+                break;
             case unit_enum::KNIGHT:
-                return std::make_unique<knight>(knight());
+                new_unit = std::make_shared<knight>(knight());
+                break;
             case unit_enum::ARCHER:
-                return std::make_unique<archer>(archer());
+                new_unit = std::make_shared<archer>(archer());
+                break;
             case unit_enum::RIFLEMAN:
-                return std::make_unique<rifleman>(rifleman());
+                new_unit = std::make_shared<rifleman>(rifleman());
+                break;
             case unit_enum::PRIEST:
-                return std::make_unique<priest>(priest());
+                new_unit = std::make_shared<priest>(priest());
+                break;
             case unit_enum::SOURCERER:
-                return std::make_unique<soucerer>(soucerer());
+                new_unit = std::make_shared<soucerer>(soucerer());
+                break;
             default:
                 return nullptr;
         }
+        new_unit->set_mediator(*mediator_ref);
+        return new_unit;
+    }
+
+    unit_factory::unit_factory(mediator& _mediator)
+    {
+        mediator_ref = &_mediator;
     }
 
     game::units::unit_factory::~unit_factory()

@@ -3,11 +3,11 @@
 
 namespace game::units
 {
-    void unit_proxy::move_to(int x, int y)
+    void unit_proxy::move_to(common::coordinates _to)
     {
         if (can_move_to)
         {
-            internal_unit.move_to(x, y);
+            internal_unit.move_to(_to);
         } else
         {
             std::cout << "Can't move to that cell" << std::endl;

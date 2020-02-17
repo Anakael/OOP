@@ -2,15 +2,26 @@
 
 #include <field/field.h>
 #include <field/field_iterator.h>
+#include <mediator/mediator.h>
 #include <objects/units/unit_factory.h>
-#include <field/neutral_objects/neutral_objects/restoring_object.h>
+#include <objects/base/base.h>
 
 int main()
 {
-    auto tmp_field = game::field::field(1, 1, 100);
-    game::units::unit_factory factory;
-    auto f = factory.create(unit_enum::FOOTMAN);
-    auto neu_obj = game::field::neutral_objects::restoring_object();
-    f->pick_up_neutral_object(neu_obj);
+    using namespace game;
+    using namespace game::units;
+    auto tmp_field = field::field(2, 2, 100);
+    mediator mediator(tmp_field);
+    unit_factory factory(mediator);
+    base base(mediator, 10, 5000, 10);
+    auto f = base.create_unit(unit_enum::FOOTMAN, common::coordinates(0,1));
+    f->move_to(common::coordinates(0,0));
+    auto r = base.create_unit(unit_enum::RIFLEMAN, common::coordinates(1, 1));
+
+    for (int i = 0; i < 25; ++i)
+    {
+        r->attack_to(common::coordinates(0,0));
+        std::cout << f->get_health() << std::endl;
+    }
     return 0;
 }

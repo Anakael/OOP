@@ -1,10 +1,36 @@
 #include "object.h"
+#include <commands/object_die_command.h>
+#include <mediator/mediator.h>
 
 namespace game
 {
     object::object(int _max_health, int _defend_point = 0)
             : health(_max_health), armor(_defend_point)
     {
+    }
+
+    void object::get_damage(const attributes::attack_attribute& _attack)
+    {
+        health.decrease(_attack.get_value() - armor.get_value());
+        if (!health.get_value())
+        {
+            die();
+        }
+    }
+
+    void object::die()
+    {
+        mediator_ref->send(commands::object_die_command(*this));
+    }
+
+    void object::get_healing(int _heal_point)
+    {
+        health.increase(_heal_point);
+    }
+
+    void object::increase_armor(int _armor_point)
+    {
+        armor.increase(_armor_point);
     }
 }
 
