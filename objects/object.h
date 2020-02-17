@@ -21,9 +21,9 @@ namespace game
 
         void increase_armor(int _armor_point);
 
-        void get_healing(int _heal_point);
+        void take_healing(int _heal_point);
 
-        void get_damage(const attributes::attack_attribute& _attack);
+        void take_damage(const attributes::attack_attribute& _attack);
 
         int get_health() const
         { return health.get_value(); }

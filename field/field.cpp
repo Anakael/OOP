@@ -84,7 +84,7 @@ namespace game::field
 
     field_iterator field::end()
     {
-        return field_iterator(*this, common::coordinates(width - 1, length - 1));
+        return field_iterator(*this, common::coordinates(width, length - 1));
     }
 
     cell& field::get(common::coordinates _from)
@@ -96,7 +96,7 @@ namespace game::field
     {
         if (count_of_objects + 1 <= max_objects_count)
         {
-            if (cells[_to.x][_to.y].get_object() == nullptr)
+            if (cells[_to.x][_to.y].get_object())
             {
                 cells[_to.x][_to.y].set_object(std::move(new_object));
                 ++count_of_objects;

@@ -15,9 +15,9 @@ namespace game::commands
         if (_field.get(to).get_object() != nullptr)
         {
             auto from = unit_sender.get_mediator().get_coords(sender);
-            if (from.distance_to(to) <= unit_sender.get_attack().get_attack_range())
+            if (from.distance_to(to) <= unit_sender.get_attack_attribute().get_attack_range())
             {
-                _field.get(to).get_object()->get_damage(unit_sender.get_attack());
+                _field.get(to).get_object()->take_damage(unit_sender.get_attack_attribute());
             }
             else
             {

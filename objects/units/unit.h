@@ -26,7 +26,7 @@ class unit : public game::object, public publisher
     public:
         unit(int _health, int _armor, int _attack, int attack_range);
 
-        attributes::attack_attribute get_attack() const { return attack; }
+        attributes::attack_attribute get_attack_attribute() const { return attack; }
 
         virtual void move_to(common::coordinates _to);
 

@@ -9,7 +9,7 @@ namespace game
     {
     }
 
-    void object::get_damage(const attributes::attack_attribute& _attack)
+    void object::take_damage(const attributes::attack_attribute& _attack)
     {
         health.decrease(_attack.get_value() - armor.get_value());
         if (!health.get_value())
@@ -23,7 +23,7 @@ namespace game
         mediator_ref->send(commands::object_die_command(*this));
     }
 
-    void object::get_healing(int _heal_point)
+    void object::take_healing(int _heal_point)
     {
         health.increase(_heal_point);
     }
