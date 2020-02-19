@@ -1,26 +1,18 @@
 #include <iostream>
 
-#include <field/field.h>
-#include <field/field_iterator.h>
-#include <mediator/mediator.h>
-#include <objects/units/unit_factory.h>
-#include <objects/base/base.h>
+#include <facade/facade.h>
+#include <common/coordinates.h>
 
 int main()
 {
     using namespace game;
-    using namespace game::units;
-    auto tmp_field = field::field(2, 2, 100);
-    mediator mediator(tmp_field);
-    base base(mediator, 10, 5000, 10);
-    auto f = base.create_unit(unit_enum::FOOTMAN, common::coordinates(0,1));
-    f->move_to(common::coordinates(0,0));
-    auto r = base.create_unit(unit_enum::RIFLEMAN, common::coordinates(1, 1));
-
-    for (int i = 0; i < 25; ++i)
-    {
-        r->attack_to(common::coordinates(0,0));
-        std::cout << f->get_health() << std::endl;
-    }
+    auto facade = game::facade(10, 10, 100);
+    facade.create_base(common::coordinates(0, 0), 10);
+    auto& base = dynamic_cast<game::base&>(*facade.select_object(common::coordinates(0, 0)));
+    base.select_unit_to_create(unit_enum::PRIEST);
+    auto handler = facade.make_handler_for(common::coordinates(1,1));
+    handler->handle();
+    std::cout << facade.select_object({1, 1}) << std::endl;
+    auto tree = base.get_tree_view();
     return 0;
 }

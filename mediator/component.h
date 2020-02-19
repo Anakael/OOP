@@ -16,8 +16,6 @@ namespace game
         void set_mediator(mediator& _mediator)
         { mediator_ref = &_mediator; }
 
-        mediator& get_mediator() const { return *mediator_ref; }
-
         virtual ~component() = 0;
     };
 }

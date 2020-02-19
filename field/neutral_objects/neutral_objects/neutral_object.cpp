@@ -1,15 +1,23 @@
 #include "neutral_object.h"
+#include <commands/object_die_command.h>
+#include <mediator/mediator.h>
 
 namespace game::field::neutral_objects
 {
-    bool neutral_object::affect_to_unit(game::units::unit& _unit)
+    void neutral_object::affect_to_unit(game::units::unit& _unit)
     {
-        return strategy->affect_to_unit(_unit);
+        strategy->affect_to_unit(_unit);
+        mediator_ref->send(commands::object_die_command(*this));
     }
 
     void neutral_object::set_strategy(strategies::neutral_object_affect_strategy&& _strategy)
     {
         strategy.reset(&_strategy);
+    }
+
+    neutral_object::neutral_object()
+            : object(0, 0)
+    {
     }
 
     neutral_object::~neutral_object()

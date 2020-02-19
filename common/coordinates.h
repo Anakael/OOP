@@ -18,7 +18,7 @@ namespace common
         {
         }
 
-        int distance_to(coordinates& other)
+        int distance_to(const coordinates& other)
         {
             return floor(sqrt(pow(other.x - x, 2) + pow(other.y - x, 2)));
         }

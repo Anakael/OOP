@@ -32,6 +32,11 @@ namespace game
     {
         armor.increase(_armor_point);
     }
+
+    common::coordinates object::get_coords() const
+    {
+        return mediator_ref->get_coords(const_cast<object&>(*this));
+    }
 }
 
 

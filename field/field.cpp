@@ -96,7 +96,7 @@ namespace game::field
     {
         if (count_of_objects + 1 <= max_objects_count)
         {
-            if (cells[_to.x][_to.y].get_object())
+            if (!cells[_to.x][_to.y].get_object())
             {
                 cells[_to.x][_to.y].set_object(std::move(new_object));
                 ++count_of_objects;

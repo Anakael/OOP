@@ -31,6 +31,7 @@ namespace game::units
         { return can_attack_from; }
 
         void move_to(common::coordinates _to) override;
+        void attack_to(common::coordinates _to) override;
     };
 }
 

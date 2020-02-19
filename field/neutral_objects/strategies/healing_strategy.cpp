@@ -3,9 +3,8 @@
 
 namespace game::field::neutral_objects::strategies
 {
-    bool healing_strategy::affect_to_unit(game::units::unit& _unit)
+    void healing_strategy::affect_to_unit(game::units::unit& _unit)
     {
         _unit.take_healing(heal_point);
-        return true;
     }
 }

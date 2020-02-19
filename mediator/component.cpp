@@ -1,4 +1,5 @@
 #include "component.h"
+#include "mediator.h"
 
 namespace game
 {

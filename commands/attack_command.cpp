@@ -12,9 +12,9 @@ namespace game::commands
     void attack_command::operator()(field::field& _field)
     {
         auto& unit_sender = dynamic_cast<units::unit&>(sender);
-        if (_field.get(to).get_object() != nullptr)
+        if (!_field.get(to).get_object())
         {
-            auto from = unit_sender.get_mediator().get_coords(sender);
+            auto from = unit_sender.get_coords();
             if (from.distance_to(to) <= unit_sender.get_attack_attribute().get_attack_range())
             {
                 _field.get(to).get_object()->take_damage(unit_sender.get_attack_attribute());

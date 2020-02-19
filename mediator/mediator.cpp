@@ -36,6 +36,11 @@ namespace game
         _command(field);
         object_coords.erase(&_command.get_sender());
     }
+
+    field::cell& mediator::get_cell(common::coordinates _coord)
+    {
+        return field.get(_coord);
+    }
 }
 
 

@@ -4,11 +4,10 @@
 #include <objects/attributes/protected_attribute.h>
 #include <objects/attributes/attack_attribute.h>
 #include <mediator/component.h>
+#include <common/coordinates.h>
 
 namespace game
 {
-
-
     class object : public component
     {
     protected:
@@ -27,6 +26,8 @@ namespace game
 
         int get_health() const
         { return health.get_value(); }
+
+        common::coordinates get_coords() const;
 
         int get_defend_point() const
         { return armor.get_value(); }

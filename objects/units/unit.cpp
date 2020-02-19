@@ -1,6 +1,7 @@
 #include "unit.h"
 #include <iostream>
 #include <commands/attack_command.h>
+#include <commands/pick_up_neutral_object_command.h>
 #include <mediator/mediator.h>
 #include <commands/move_command.h>
 
@@ -16,7 +17,7 @@ namespace game::units
 
     void unit::die()
     {
-        https://github.com/Anakael/OOP        notify(*this);
+        notify(*this);
         object::die();
     }
 
@@ -25,16 +26,13 @@ namespace game::units
         return this == &other;
     }
 
-    void unit::pick_up_neutral_object(game::field::neutral_objects::neutral_object& neutral_object)
+    void unit::pick_up_neutral_object(game::field::neutral_objects::neutral_object& _neutral_object)
     {
-        if (!neutral_object.affect_to_unit(*this))
-        {
-            std::cout << "Unable to pick up such neutral object for this unit" << std::endl;
-        }
+        mediator_ref->send(commands::pick_up_neutral_object_command(*this, _neutral_object));
     }
 
     unit::unit(int _health, int _armor, int _attack, int _attack_range)
-        : object(_health, _armor), attack(_attack, _attack_range)
+            : object(_health, _armor), attack(_attack, _attack_range)
     {
     }
 

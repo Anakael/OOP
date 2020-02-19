@@ -24,6 +24,8 @@ namespace game
         field::field& field;
         std::map<object*, common::coordinates> object_coords;
     public:
+        field::cell& get_cell(common::coordinates _coord);
+
         explicit mediator(field::field& _field);
 
         void send(commands::command&& _command);

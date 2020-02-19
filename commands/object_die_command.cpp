@@ -10,7 +10,7 @@ namespace game::commands
 
     void object_die_command::operator()(field::field& _field)
     {
-        _field.delete_object(sender.get_mediator().get_coords(sender));
+        _field.delete_object(sender.get_coords());
     }
 }
 

@@ -24,4 +24,15 @@ namespace game::units
     {
         return typeid(internal_unit);
     }
+
+    void unit_proxy::attack_to(common::coordinates _to)
+    {
+        if (can_attack_from)
+        {
+            internal_unit.attack_to(_to);
+        } else
+        {
+            std::cout << "Can't attack from that cell" << std::endl;
+        }
+    }
 }

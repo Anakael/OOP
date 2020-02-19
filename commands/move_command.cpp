@@ -12,7 +12,7 @@ namespace game::commands
 
     void move_command::operator()(field::field& _field)
     {
-        auto from = sender.get_mediator().get_coords(sender);
+        auto from = sender.get_coords();
         _field.move_object(from, to);
     }
 }
