@@ -1,9 +1,9 @@
 #include "base.h"
 #include <iostream>
 #include <commands/create_object_command.h>
+#include <logger/logger_proxy.h>
 #include "views/unit_tree_composite.h"
 #include "balance.h"
-#include <iostream>
 
 namespace
 {
@@ -34,9 +34,11 @@ namespace game
     std::shared_ptr<units::unit> base::create_unit(common::coordinates _to)
     {
         auto new_unit = factory->create(selected_unit.value());
+        new_unit->set_mediator(*mediator_ref);
         units.emplace_back(*new_unit);
         new_unit->add_subscriber(*this);
         mediator_ref->send(commands::create_object_command(*this, new_unit, _to));
+        logger::logger_proxy::inst() << "Created unit at: " <<  _to << "\n";
         return new_unit;
     }
 
@@ -53,9 +55,12 @@ namespace game
 
         for (auto& unit : units)
         {
+            if (try_cast_and_call<game::units::warriors::warrior>(component, unit))
+            { continue; }
+            if (try_cast_and_call<game::units::shooters::shooter>(component, unit))
+            { continue; }
             if (try_cast_and_call<game::units::mages::mage>(component, unit))
             { continue; }
-
         }
         return component;
     }

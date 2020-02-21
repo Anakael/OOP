@@ -7,7 +7,10 @@ namespace game::handlers
 {
     class none_handler : public handler
     {
+    private:
+        const std::string reason;
     public:
+        none_handler(std::string  _reason);
         void handle() override;
     };
 }

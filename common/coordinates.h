@@ -2,6 +2,7 @@
 #define OOP_COORDINATES_H
 
 #include <cmath>
+#include <ostream>
 
 namespace common
 {
@@ -21,6 +22,13 @@ namespace common
         int distance_to(const coordinates& other)
         {
             return floor(sqrt(pow(other.x - x, 2) + pow(other.y - x, 2)));
+        }
+
+
+        friend std::ostream& operator<<(std::ostream& os, const coordinates& coords)
+        {
+            os << "{x:" << coords.x << ";" << "y:" << coords.y << "}" << std::endl;
+            return os;
         }
     };
 }

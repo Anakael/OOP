@@ -105,20 +105,20 @@ namespace game::field
             {
                 std::cout << "Cell is not empty" << std::endl;
             }
-
         }
         else
         {
-            std::cout << "Unable to add object. Max count of objects limit is reached" << std::endl;
+            std::cout << "Unable target add object. Max count of objects limit is reached" << std::endl;
         }
     }
 
     void field::move_object(common::coordinates _from, common::coordinates _to)
     {
+
         auto obj = cells[_from.x][_from.y].get_object();
         if (obj == nullptr)
         {
-            std::cout << "Nothing to move" << std::endl;
+            std::cout << "Nothing target move" << std::endl;
         }
         else
         {

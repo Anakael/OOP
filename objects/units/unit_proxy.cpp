@@ -10,7 +10,7 @@ namespace game::units
             internal_unit.move_to(_to);
         } else
         {
-            std::cout << "Can't move to that cell" << std::endl;
+            std::cout << "Can't move target that cell" << std::endl;
         }
     }
 
@@ -25,7 +25,7 @@ namespace game::units
         return typeid(internal_unit);
     }
 
-    void unit_proxy::attack_to(common::coordinates _to)
+    void unit_proxy::attack_to(object& _to)
     {
         if (can_attack_from)
         {

@@ -9,9 +9,9 @@ namespace game::commands
     class attack_command : public command
     {
     private:
-        common::coordinates to;
+        object& target;
     public:
-        attack_command(object& _sender, common::coordinates _to);
+        attack_command(object& _sender, object& _to);
         void operator()(field::field& _field) override;
     };
 }

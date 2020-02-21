@@ -2,6 +2,7 @@
 #include <objects/units/unit_factory.h>
 #include "none_handler.h"
 #include "attack_handler.h"
+#include "pickup_neutral_object_handler.h"
 #include "move_handler.h"
 #include "create_unit_handler.h"
 #include <objects/units/unit.h>
@@ -11,11 +12,11 @@
 namespace game::handlers
 {
     std::shared_ptr<handlers::handler>
-    handlers_factory::create_handler(std::shared_ptr<object> _selected_object, common::coordinates _to)
+    handlers_factory::create_handler(const std::shared_ptr<object>& _selected_object, common::coordinates _to)
     {
         if (!_selected_object)
         {
-            return std::make_shared<none_handler>();
+            return std::make_shared<none_handler>("Selected object is None");
         }
         auto cell_to = mediator_ref->get_cell(_to);
         auto* unit$ = dynamic_cast<units::unit*>(_selected_object.get());
@@ -26,14 +27,26 @@ namespace game::handlers
             cell_to.get_landscape()->affect_to_unit(unit_proxy);
             mediator_ref->get_cell(coords_from).get_landscape()->affect_to_unit(unit_proxy);
 
-            if (cell_to.get_object())
+            auto* cell_to_unit$ = dynamic_cast<units::unit*>(cell_to.get_object().get());
+            if (cell_to_unit$)
             {
                 bool enough_distance = coords_from.distance_to(_to) <= unit$->get_attack_attribute().get_attack_range();
                 if (unit_proxy.get_can_attack_from() && enough_distance)
                 {
-                    return std::make_shared<attack_handler>(*unit$, _to);
+                    return std::make_shared<attack_handler>(*unit$, *cell_to.get_object());
                 }
             }
+
+            auto* cell_to_neutal_object$ = dynamic_cast<field::neutral_objects::neutral_object*>(cell_to.get_object().get());
+            if (cell_to_neutal_object$)
+            {
+                bool enough_distance = coords_from.distance_to(_to) <= 1;
+                if (unit_proxy.get_can_attack_from() && enough_distance)
+                {
+                    return std::make_shared<pickup_neutral_object_handler>(*unit$, *cell_to_neutal_object$);
+                }
+            }
+
             if (unit_proxy.get_can_move_to())
             {
                 bool enough_distance = true; // TODO: add speed attrib
@@ -49,14 +62,12 @@ namespace game::handlers
             {
                 if (base$->get_units_count() + 1 > base$->get_max_units_count())
                 {
-                    return std::make_shared<none_handler>();
-                    //std::cout << "Max count of units reached" << std::endl;
+                    return std::make_shared<none_handler>("Maximum count reached");
                 }
 
                 if (mediator_ref->get_coords(*base$).distance_to(_to) > 1)
                 {
-                    //std::cout << "Max much distance" << std::endl;
-                    return std::make_shared<none_handler>();
+                    return std::make_shared<none_handler>("Too much distance");
                 }
                 units::unit_factory temp_factory(*mediator_ref);
                 auto temp_unit = temp_factory.create(selected_unit.value());
@@ -69,7 +80,7 @@ namespace game::handlers
             }
         }
 
-        return std::make_shared<none_handler>();
+        return std::make_shared<none_handler>("Cannot do anything");
     }
 }
 

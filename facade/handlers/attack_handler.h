@@ -11,9 +11,9 @@ namespace game::handlers
     {
     private:
         units::unit& unit;
-        common::coordinates to;
+        object& target;
     public:
-        attack_handler(units::unit& _unit, common::coordinates _to);
+        attack_handler(units::unit& _unit, object& _target);
 
         void handle() override;
     };

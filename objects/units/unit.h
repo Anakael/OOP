@@ -34,7 +34,7 @@ class unit : public game::object, public publisher
 
         bool operator==(const unit& other);
 
-        virtual void attack_to(common::coordinates _to);
+        virtual void attack_to(object& _target);
 
         ~unit() override = 0;
     };

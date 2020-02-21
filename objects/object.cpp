@@ -1,6 +1,7 @@
 #include "object.h"
 #include <commands/object_die_command.h>
 #include <mediator/mediator.h>
+#include <logger/logger_proxy.h>
 
 namespace game
 {
@@ -21,6 +22,7 @@ namespace game
     void object::die()
     {
         mediator_ref->send(commands::object_die_command(*this));
+        logger::logger_proxy::inst() << "Object died at: " << get_coords() << "\n";
     }
 
     void object::take_healing(int _heal_point)

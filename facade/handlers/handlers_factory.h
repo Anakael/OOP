@@ -12,7 +12,7 @@ namespace game::handlers
     {
     public:
         std::shared_ptr<handlers::handler>
-        create_handler(std::shared_ptr<object> selected_object, common::coordinates _to);
+        create_handler(const std::shared_ptr<object>& selected_object, common::coordinates _to);
     };
 }
 
