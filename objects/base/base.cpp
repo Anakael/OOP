@@ -38,7 +38,7 @@ namespace game
         units.emplace_back(*new_unit);
         new_unit->add_subscriber(*this);
         mediator_ref->send(commands::create_object_command(*this, new_unit, _to));
-        logger::logger_proxy::inst() << "Created unit at: " <<  _to << "\n";
+        logger::logger_proxy::inst() << "Created unit at: " << _to << "\n";
         return new_unit;
     }
 
@@ -63,6 +63,29 @@ namespace game
             { continue; }
         }
         return component;
+    }
+
+    std::shared_ptr<save_load::memento> base::save()
+    {
+        return std::make_shared<base_memento>(health, armor, typeid(*this), max_units_count);
+    }
+
+    void base::restore(std::shared_ptr<save_load::memento> _memento)
+    {
+        object::restore(_memento);
+        auto memento = std::static_pointer_cast<base_memento>(_memento);
+        max_units_count = memento->max_units;
+    }
+
+    std::vector<int> base::get_units_ids_from_mapping(std::map<game::units::unit*, int>& _mapping)
+    {
+        std::vector<int> res_vec;
+        for (auto& unit : units)
+        {
+            res_vec.push_back(_mapping[&unit.get()]);
+        }
+
+        return res_vec;
     }
 }
 

@@ -3,7 +3,7 @@
 
 namespace game::field::neutral_objects::strategies
 {
-    void strengthening_strategy::affect_to_unit(game::units::unit& _unit)
+    void strengthening_strategy::operator()(game::units::unit& _unit)
     {
         _unit.increase_armor(armor_point);
     }

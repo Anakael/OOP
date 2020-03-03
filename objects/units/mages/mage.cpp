@@ -12,6 +12,16 @@ namespace game::units::mages
     {
     }
 
+    std::shared_ptr<save_load::memento> mage::save()
+    {
+        return std::make_shared<mage_memento>(health, armor, typeid(*this), attack, mana);
+    }
+
+    void mage::restore(std::shared_ptr<save_load::memento> _memento)
+    {
+        unit::restore(_memento);
+    }
+
     mage::~mage()
     = default;
 }

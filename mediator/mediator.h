@@ -37,6 +37,8 @@ namespace game
         void send(commands::object_die_command&& _command);
 
         common::coordinates get_coords(object& _object);
+
+        void restore();
     };
 }
 

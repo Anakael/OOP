@@ -39,6 +39,24 @@ namespace game
     {
         return mediator_ref->get_coords(const_cast<object&>(*this));
     }
+
+    std::shared_ptr<save_load::memento> object::save()
+    {
+        return std::make_shared<object_memento>(game::attributes::protected_attribute(health.get_value(),
+                                                                                      health.get_max_value()),
+                                                game::attributes::base_attribute(armor.get_value()),
+                                                typeid(*this));
+    }
+
+    void object::restore(std::shared_ptr<save_load::memento> _imemento)
+    {
+        auto memento = std::static_pointer_cast<object_memento>(_imemento);
+        health = memento->health;
+        armor = memento->armor;
+    }
+
+    object::~object()
+    = default;
 }
 
 

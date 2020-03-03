@@ -14,7 +14,7 @@ namespace game
     class facade
     {
     private:
-        std::unique_ptr<field::field> field;
+        std::shared_ptr<field::field> field;
         std::unique_ptr<mediator> mediator;
         std::unique_ptr<handlers::handlers_factory> handlers_factory;
         std::shared_ptr<game::base> base;
@@ -27,6 +27,10 @@ namespace game
         std::shared_ptr<object> select_object(common::coordinates _coords);
 
         std::shared_ptr<handlers::handler> make_handler_for(common::coordinates _to);
+
+        void save(const std::string& _out);
+
+        void load(const std::string& _in);
     };
 }
 

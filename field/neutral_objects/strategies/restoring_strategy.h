@@ -11,9 +11,9 @@ namespace game::field::neutral_objects::strategies
     private:
         int mana_point = 200;
     public:
-        void affect_to_unit(game::units::unit &_unit) override;
+        void operator()(game::units::unit &_unit) override;
 
-        void affect_to_unit(game::units::mages::mage& _mage);
+        void operator()(game::units::mages::mage& _mage);
     };
 }
 

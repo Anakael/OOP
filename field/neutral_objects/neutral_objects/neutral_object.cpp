@@ -4,9 +4,9 @@
 
 namespace game::field::neutral_objects
 {
-    void neutral_object::affect_to_unit(game::units::unit& _unit)
+    void neutral_object::operator()(game::units::unit& _unit)
     {
-        strategy->affect_to_unit(_unit);
+        (*strategy)(_unit);
         mediator_ref->send(commands::object_die_command(*this));
     }
 

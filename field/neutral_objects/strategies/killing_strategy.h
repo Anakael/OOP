@@ -7,7 +7,7 @@ namespace game::field::neutral_objects::strategies
 {
     class killing_strategy : public neutral_object_affect_strategy
     {
-        void affect_to_unit(game::units::unit &_unit) override;
+        void operator()(game::units::unit &_unit) override;
     };
 }
 

@@ -126,5 +126,39 @@ namespace game::field
             delete_object(_from);
         }
     }
+
+    void field::restore(std::shared_ptr<save_load::memento> _imemento)
+    {
+        auto memento = std::static_pointer_cast<field_memento>(_imemento);
+        length = memento->length;
+        width = memento->width;
+        max_objects_count = memento->max_objects_count;
+        count_of_objects = memento->count_objects;
+        cells = std::make_unique<std::unique_ptr<cell[]>[]>(length);
+        for (int i = 0; i < length; ++i)
+        {
+            cells[i] = std::make_unique<cell[]>(width);
+            for (int j = 0; j < length; ++j)
+            {
+                cells[i][j].restore(memento->cells_mementos[i][j]);
+            }
+        }
+    }
+
+    std::shared_ptr<save_load::memento> field::save()
+    {
+        std::vector<std::vector<std::shared_ptr<cell::cell_memento>>> cell_mementos;
+        for (int i = 0; i < length; ++i)
+        {
+            cell_mementos.emplace_back();
+            for (int j = 0; j < width; ++j)
+            {
+                cell_mementos[i].push_back(std::static_pointer_cast<cell::cell_memento>((cells[i][j].save())));
+            }
+        }
+
+        return std::make_shared<field_memento>(length, width, max_objects_count, count_of_objects,
+                                               std::move(cell_mementos));
+    }
 }
 

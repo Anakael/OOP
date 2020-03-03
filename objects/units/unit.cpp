@@ -43,4 +43,14 @@ namespace game::units
         logger::logger_proxy::inst() << "Attack unit at: " << _target.get_coords() << "\n";
         mediator_ref->send(commands::attack_command(*this, _target));
     }
+
+    std::shared_ptr<save_load::memento> unit::save()
+    {
+        return std::make_shared<unit_memento>(health, armor, typeid(*this), attack);
+    }
+
+    void unit::restore(std::shared_ptr<save_load::memento> _memento)
+    {
+
+    }
 }

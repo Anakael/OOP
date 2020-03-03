@@ -13,7 +13,7 @@ namespace game::commands
     void pick_up_neutral_object_command::operator()(game::field::field& _field)
     {
         auto unit = dynamic_cast<units::unit*>(&sender);
-        neutral_object.affect_to_unit(*unit);
+        neutral_object(*unit);
     }
 }
 

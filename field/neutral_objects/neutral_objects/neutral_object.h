@@ -20,7 +20,7 @@ namespace game::field::neutral_objects
         void set_strategy(strategies::neutral_object_affect_strategy&& _strategy);
     public:
         neutral_object();
-        virtual void affect_to_unit(game::units::unit& _unit) = 0;
+        virtual void operator()(game::units::unit& _unit) = 0;
         ~neutral_object() override;
     };
 

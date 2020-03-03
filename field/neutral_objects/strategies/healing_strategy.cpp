@@ -3,7 +3,7 @@
 
 namespace game::field::neutral_objects::strategies
 {
-    void healing_strategy::affect_to_unit(game::units::unit& _unit)
+    void healing_strategy::operator()(game::units::unit& _unit)
     {
         _unit.take_healing(heal_point);
     }

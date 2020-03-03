@@ -2,6 +2,8 @@
 #include <logger/logger_proxy.h>
 #include <field/field.h>
 #include <commands/create_object_command.h>
+#include <save_load/save_command.h>
+#include <save_load/load_command.h>
 
 namespace game
 {
@@ -34,6 +36,16 @@ namespace game
         auto handler = handlers_factory->create_handler(selected_object, _to);
         logger::logger_proxy::inst() << "Create handler for coordinates: " << _to;
         return handler;
+    }
+
+    void facade::save(const std::string& _out)
+    {
+        save_load::save_command(field, _out)();
+    }
+
+    void facade::load(const std::string& _in)
+    {
+        save_load::load_command(field, _in)();
     }
 }
 

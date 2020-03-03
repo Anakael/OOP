@@ -41,6 +41,20 @@ namespace game
     {
         return field.get(_coord);
     }
+
+    void mediator::restore()
+    {
+        object_coords.clear();
+        for (int i = 0; i < field.get_length(); ++i)
+        {
+            for (int j = 0; j < field.get_length(); ++j)
+            {
+                auto obj = field.get({i, j}).get_object().get();
+                obj->set_mediator(*this);
+                object_coords[obj] = {i, j};
+            }
+        }
+    }
 }
 
 
